@@ -1,6 +1,6 @@
 <nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="" target="_blank">
+    <a class="navbar-item" href="https://www.intelligentplant.com" target="_blank">
       <!-- Replace with your app logo!!! -->
       <span>{{ appName }}</span>
     </a>
@@ -35,7 +35,7 @@
             <span>Industrial App Store</span>
           </a>
           <hr class="navbar-divider">
-          <a class="navbar-item" (click)="logout()" [title]="'Log out of ' + appName">
+          <a href="javascript:void(0)" class="navbar-item" (click)="logout()" [title]="'Log out of ' + appName">
             <span class="icon">
               <fa-icon [icon]="['fas', 'sign-out-alt']" [fixedWidth]="true"></fa-icon>
             </span>

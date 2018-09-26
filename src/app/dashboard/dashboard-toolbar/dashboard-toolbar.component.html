@@ -40,14 +40,14 @@
         </div>
         <div class="dropdown-menu" id="dashboard-toolbar-dropdown-menu" role="menu">
           <div class="dropdown-content">
-            <a routerLink="." (click)="editDashboard()" class="dropdown-item">
+            <a (click)="editDashboard()" class="dropdown-item">
               <span class="icon">
                 <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
               </span>
               <span>Edit</span>
             </a>
             <hr class="dropdown-divider">
-            <a routerLink="." (click)="deleteDashboard()" class="dropdown-item">
+            <a (click)="deleteDashboard()" class="dropdown-item">
               <span class="icon">
                 <fa-icon [icon]="['fas', 'trash']" [fixedWidth]="true"></fa-icon>
               </span>

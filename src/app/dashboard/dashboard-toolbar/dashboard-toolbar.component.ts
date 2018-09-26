@@ -83,12 +83,13 @@ export class DashboardToolbarComponent implements OnInit {
     return this._selectedId ? true : false;
   }
 
-  editDashboard(el: any, className: string): void {
+  editDashboard(): void {
     if (!this.canEditDashboard()) {
       return;
     }
 
-    el.classList.remove(className);
+    this.hideSettingsMenu();
+
     this._editorSvc.edit(this._selectedId);
   }
 
@@ -100,6 +101,8 @@ export class DashboardToolbarComponent implements OnInit {
     if (!this.canDeleteDashboard()) {
       return;
     }
+
+    this.hideSettingsMenu();
 
     if (!confirm('Delete this dashboard?')) {
       return;
