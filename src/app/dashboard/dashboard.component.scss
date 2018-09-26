@@ -1,0 +1,14 @@
+@import "../../styles.scss";
+
+.toolbar {
+    position: fixed;
+    top: $navbar-height;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    z-index: $navbar-fixed-z - 1;
+}
+
+.dashboards {
+    margin-top: 3rem;
+}

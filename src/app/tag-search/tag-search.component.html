@@ -1,0 +1,80 @@
+<div [formGroup]="searchForm" class="panel">
+  <div class="panel-block display-block">
+    <div class="control has-icons-left">
+      <div class="select is-fullwidth">
+        <select formControlName="dsn">
+          <option *ngIf="dataSources && dataSources.length !== 1" disabled value="">Select a data source</option>
+          <option *ngFor="let ds of dataSources" [value]="ds.Name.QualifiedName">{{ ds.Name.DisplayName }}</option>
+        </select>
+      </div>
+      <span class="icon is-left">
+        <fa-icon [icon]="['fas', 'chart-line']" aria-hidden="true"></fa-icon>
+      </span>
+    </div>
+  </div>
+
+  <div class="panel-block display-block">
+
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input is-fullwidth" type="text" formControlName="name" placeholder="tag name">
+        <span class="icon is-left">
+          <fa-icon *ngIf="busy" [icon]="['fas', 'circle-notch']" [spin]="true" aria-hidden="true"></fa-icon>
+          <fa-icon *ngIf="!busy" [icon]="['fas', 'search']" aria-hidden="true"></fa-icon>
+        </span>
+      </p>
+    </div>
+
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input is-fullwidth" type="text" formControlName="description" placeholder="description">
+        <span class="icon is-left">
+          <fa-icon *ngIf="busy" [icon]="['fas', 'circle-notch']" [spin]="true" aria-hidden="true"></fa-icon>
+          <fa-icon *ngIf="!busy" [icon]="['fas', 'search']" aria-hidden="true"></fa-icon>
+        </span>
+      </p>
+    </div>
+
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input is-fullwidth" type="text" formControlName="units" placeholder="units">
+        <span class="icon is-left">
+          <fa-icon *ngIf="busy" [icon]="['fas', 'circle-notch']" [spin]="true" aria-hidden="true"></fa-icon>
+          <fa-icon *ngIf="!busy" [icon]="['fas', 'search']" aria-hidden="true"></fa-icon>
+        </span>
+      </p>
+    </div>
+
+  </div>
+
+  <a *ngFor="let tag of tags" class="panel-block display-block">
+    <label *ngIf="canSelect" class="is-small">
+      <input type="checkbox" [checked]="isTagSelected(tag)" (change)="selectTag(tag, $event.target)" [disabled]="busy">
+      {{ tag.Name }}
+    </label>
+    <span *ngIf="!canSelect">
+      {{ tag.Name }}
+    </span>
+  </a>
+
+  <div class="panel-block">
+    <nav class="pagination is-right" role="navigation" aria-label="Tag pagination">
+      <button class="button pagination-previous" [disabled]="!canPagePrevious()" (click)="pagePrevious()">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'chevron-left']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>
+          Previous
+        </span>
+      </button>
+      <button class="button pagination-next" [disabled]="!canPageNext()" (click)="pageNext()">
+        <span>
+          Next
+        </span>
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'chevron-right']" [fixedWidth]="true"></fa-icon>
+        </span>
+      </button>
+    </nav>
+  </div>
+</div>

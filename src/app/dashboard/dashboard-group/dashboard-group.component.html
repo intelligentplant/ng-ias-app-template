@@ -1,0 +1,14 @@
+<article class="message dashboard-group">
+  <div class="message-header">
+    {{ group.name }}
+  </div>
+  <div class="message-body">
+    <div class="content">
+      <div class="columns is-multiline">
+        <div *ngFor="let item of group.items" class="column is-12-mobile is-6-tablet is-4-desktop is-3-widescreen is-3-fullhd">
+            <app-dashboard-group-item [item]="item"></app-dashboard-group-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

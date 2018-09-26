@@ -1,0 +1,17 @@
+@import "../styles.scss";
+
+.app-is-busy {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: $primary;
+    color: $primary-invert;
+    border: solid 1px $primary;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0;
+}
+
+.app-is-busy.visible {
+    opacity: 1 !important;
+}

@@ -1,0 +1,13 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="section">
+  <div class="container is-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div #appIsBusy class="app-is-busy">
+  <span class="icon is-large">
+    <fa-icon [icon]="['fas', 'circle-notch']" [spin]="true" size="2x"></fa-icon>
+  </span>
+</div>

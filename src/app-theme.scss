@@ -1,0 +1,19 @@
+// You can override various Bulma variables e.g. colours, gap sizes, in this file.
+// See https://bulma.io/documentation/customize/variables/ for details.
+
+@import "~bulma/sass/utilities/functions.sass";
+
+$intelligent-plant-green: #7ac143;
+$bg-light-grey: #e7e6e6;
+
+// Colour overrides:
+
+$primary: $intelligent-plant-green;
+$primary-invert: findColorInvert($intelligent-plant-green);
+
+$body-background-color: $bg-light-grey;
+
+// Dimension overrides:
+
+$gap: 12px;
+$section-padding: 1.5rem;

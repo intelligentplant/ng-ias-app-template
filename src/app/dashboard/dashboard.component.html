@@ -1,0 +1,41 @@
+<app-dashboard-toolbar [(dashboard)]="dashboardId" class="toolbar has-background-grey-darker"></app-dashboard-toolbar>
+
+<div *ngIf="!editMode" class="dashboards">
+    <div *ngIf="dashboard">
+        <app-dashboard-group *ngFor="let group of dashboard.groups" [group]="group"></app-dashboard-group>
+    </div>
+
+    <div *ngIf="!dashboard">
+        <article class="message dashboard-group">
+            <div class="message-body">
+                <div class="content">
+                    <p>No dashboard selected. Use the toolbar above to select a dashboard or create a new one.</p>
+                    <p *ngIf="dashboards && dashboards.length > 0">
+                        Alternatively, select from the available dashboards below:
+                    </p>
+                    <ul *ngIf="dashboards && dashboards.length > 0">
+                        <li *ngFor="let db of dashboards">
+                            <span>
+                                <span>
+                                    {{ db.name }}
+                                </span>
+                                <span class="icon" [title]="db.description ? db.description : db.name">
+                                    <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
+                                </span>
+                                &nbsp;
+                                <button class="button is-small is-primary" (click)="open(db.id)" title="Open this dashboard">
+                                    Open
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </div>
+
+</div>
+
+<div *ngIf="editMode" class="dashboards">
+    <app-dashboard-editor></app-dashboard-editor>
+</div>

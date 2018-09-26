@@ -1,0 +1,32 @@
+<h1 class="title">Hello!</h1>
+
+<h4 class="subtitle">Welcome to {{appName}}!</h4>
+
+<div class="content">
+  
+  <p>
+    This is an example app that uses the Intelligent Plant <a href="https://appstore.intelligentplant.com">Industrial App Store</a> 
+    to create real-time dashboards displaying process tag data.
+  </p>
+
+  <p>
+    The app uses the following libraries:
+  </p>
+
+  <ul>
+    <li><a href="https://angular.io/" target="_blank">Angular 6</a></li>
+    <li><a href="https://cli.angular.io/" target="_blank">Angular CLI</a></li>
+    <li><a href="https://bulma.io/" target="_blank">Bulma</a></li>
+    <li><a href="https://fontawesome.com/" target="_blank">Font Awesome 5</a></li>
+  </ul>
+
+  <p>To get started, you can log in using the Industrial App Store.</p>
+
+  <button class="button is-primary" (click)="login()" title="Log in using the Industrial App Store">
+    <span class="icon">
+      <fa-icon [icon]="['fas', 'sign-in-alt']" [fixedWidth]="true"></fa-icon>
+    </span>
+    <span>Login</span>
+  </button>
+  
+</div>

@@ -1,0 +1,84 @@
+<nav class="level is-mobile">
+  <div class="level-left">
+
+    <div class="level-item">
+      <div>
+        <div class="control has-icons-left">
+          <div class="select is-small">
+            <select (change)="onDashboardSelected($event.target.value)" [disabled]="editMode">
+              <option value="" disabled>Select a dashboard</option>
+              <option *ngFor="let item of dashboards" [value]="item.id" [title]="item.description ? item.description : item.name" [selected]="item.id === dashboard">{{ item.name }}</option>
+            </select>
+            <span class="icon is-left is-small">
+              <fa-icon [icon]="['fas', 'file']"></fa-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="level-item">
+      <button class="button is-primary is-small" title="Create new dashboard" [disabled]="!canCreateDashboard()" (click)="createDashboard()">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'plus']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>New</span>
+      </button>
+    </div>
+
+  </div>
+
+  <div *ngIf="!editMode && dashboard" class="level-right">
+    <div class="level-item">
+      <div #settingsMenu class="dropdown is-right">
+        <div class="dropdown-trigger">
+          <button class="button is-small" aria-haspopup="true" aria-controls="dashboard-toolbar-dropdown-menu" title="Dashboard settings" (click)="toggleSettingsMenu()">
+            <span class="icon">
+              <fa-icon [icon]="['fas', 'cogs']" aria-hidden="true"></fa-icon>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dashboard-toolbar-dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a routerLink="." (click)="editDashboard()" class="dropdown-item">
+              <span class="icon">
+                <fa-icon [icon]="['fas', 'edit']" [fixedWidth]="true"></fa-icon>
+              </span>
+              <span>Edit</span>
+            </a>
+            <hr class="dropdown-divider">
+            <a routerLink="." (click)="deleteDashboard()" class="dropdown-item">
+              <span class="icon">
+                <fa-icon [icon]="['fas', 'trash']" [fixedWidth]="true"></fa-icon>
+              </span>
+              <span>Delete</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="editMode" class="level-right">
+    <div class="level-item">
+      <button class="button is-primary is-small" title="Save changes" (click)="saveDashboardChanges()" [disabled]="!editModeDirty">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'check']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>Save</span>
+      </button>
+    </div>
+
+    <div class="level-item">
+      <button class="button is-small" title="Discard changes" (click)="discardDashboardChanges()">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'times']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>Cancel</span>
+      </button>
+    </div>
+  </div>
+
+</nav>

@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Import this file in any component style files where you need to use a Bulma variable! */
+
+@charset "utf-8";
+
+@import "./app-theme.scss";
+@import "~bulma";
+
+.is-full-width {
+    width: 100%;
+}

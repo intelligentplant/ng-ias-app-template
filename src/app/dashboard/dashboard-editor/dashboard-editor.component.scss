@@ -1,0 +1,15 @@
+@import "../../../styles.scss";
+
+.group-name {
+    margin-bottom: 5px;
+}
+
+.group-item {
+    background-color: $grey-light;
+}
+
+.tag-search {
+    @include from($desktop) {
+        width: calc(100vw - 200px);
+    }
+}

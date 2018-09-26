@@ -1,0 +1,141 @@
+<form [formGroup]="form" novalidate>
+
+  <div class="message" formGroupName="details">
+
+    <div class="message-header">
+      Dashboard Details
+    </div>
+
+    <div class="message-body">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Name (required)" formControlName="name">
+          <p [class.is-invisible]="form.get('details.name').valid" class="help is-danger">A name
+            is required.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control">
+          <textarea class="textarea" placeholder="Description (optional)" formControlName="description"></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Update Rate (seconds)</label>
+        <div class="control">
+          <input class="input" type="number" min="1" step="1" placeholder="Update rate (required)" formControlName="updateRate">
+          <p [class.is-invisible]="form.get('details.updateRate').valid" class="help is-danger">An update
+            rate of at least 1 second is required.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div formArrayName="groups">
+    
+    <div *ngFor="let group of form.get('groups').controls; let i=index" [formGroupName]="i" class="message">
+
+      <div class="message-header">
+        Group: {{ group.get('name').value ? group.get('name').value : 'Untitled Group' }}
+        <button class="delete" aria-label="delete" (click)="deleteGroup(i)" title="Delete this group"></button>
+      </div>
+
+      <div class="message-body">
+        <div class="content">
+
+          <div class="control group-name">
+            <input class="input" type="text" placeholder="Name (required)" formControlName="name">
+            <p [class.is-invisible]="group.get('name').valid" class="help is-danger">A name is
+              required.</p>
+          </div>
+
+          <div formArrayName="items" class="columns is-multiline">
+            <div *ngFor="let item of group.get('items').controls; let j=index" [formGroupName]="j" class="column is-full-mobile is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
+              <div class="notification group-item">
+                <button class="delete" aria-label="delete" (click)="removeTagFromGroup(i, j)" title="Remove this tag"></button>
+                <p class="title is-6 has-text-centered is-uppercase">
+                  <span>{{ item.get('tag').value }}</span>
+                </p>
+                <div formGroupName="subscriptions">
+                  <div class="control">
+                    <label class="checkbox">
+                      <input type="checkbox" formControlName="snapshot">
+                      Display snapshot value
+                    </label>
+                  </div>
+                  <div class="control">
+                    <label class="checkbox">
+                      <input type="checkbox" formControlName="avg24">
+                      Display 24H average value
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <button class="button is-primary" (click)="addTagsToGroup(i)">
+                  <span class="icon">
+                    <fa-icon [icon]="['fas', 'plus']" [fixedWidth]="true"></fa-icon>
+                  </span>
+                  <span>Add Tags</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <button type="button" class="button is-primary" title="Add a new group to the dashboard" (click)="addGroup()">
+            <span class="icon">
+              <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+            </span>
+            <span>Add Group</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+
+<div class="modal" [ngClass]="{ 'is-active': isTagBrowserVisible }">
+  <div class="modal-background"></div>
+  <div class="modal-card tag-search">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Add Tags</p>
+      <button class="delete" aria-label="close" (click)="hideTagBrowser()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="content">
+        <app-tag-search [dataSources]="dataSources" [canSelect]="true"></app-tag-search>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-primary" (click)="hideTagBrowserAndAddTags()">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'check']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>Save</span>
+      </button>
+      <button class="button" (click)="hideTagBrowser()">
+        <span class="icon">
+          <fa-icon [icon]="['fas', 'times']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>Cancel</span>
+      </button>
+    </footer>
+  </div>
+</div>

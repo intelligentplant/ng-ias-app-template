@@ -1,0 +1,48 @@
+<nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="" target="_blank">
+      <!-- Replace with your app logo!!! -->
+      <span>{{ appName }}</span>
+    </a>
+    <a *ngIf="isLoggedIn" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" #navBurger [title]="isNavMenuVisible ? 'Close the navigation menu' : 'Open the navigation menu'" (click)="toggleNavMenuVisibility()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu" [ngClass]="{ 'is-active': isNavMenuVisible }">
+    <div *ngIf="isLoggedIn" class="navbar-start">
+      <a routerLink="/" class="navbar-item">
+        <span class="icon has-text-primary">
+          <fa-icon [icon]="['fas', 'tachometer-alt']" [fixedWidth]="true"></fa-icon>
+        </span>
+        <span>Dashboards</span>
+      </a>
+    </div>
+    <div *ngIf="isLoggedIn" class="navbar-end">
+      <div class="navbar-item has-dropdown" #userMenu (click)="toggleUserMenuDropdown()">
+        <a class="navbar-link">
+          <figure class="image is-24x24 avatar">
+            <img [src]="userInfo ? userInfo.PicUrl : ''" alt="Profile picture">
+          </figure>
+          {{ userInfo?.FormattedName }}
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://appstore.intelligentplant.com" target="_blank" title="Visit the Industrial App Store (new window)">
+            <span class="icon">
+              <fa-icon [icon]="['fas', 'globe']" [fixedWidth]="true"></fa-icon>
+            </span>
+            <span>Industrial App Store</span>
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item" (click)="logout()" [title]="'Log out of ' + appName">
+            <span class="icon">
+              <fa-icon [icon]="['fas', 'sign-out-alt']" [fixedWidth]="true"></fa-icon>
+            </span>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

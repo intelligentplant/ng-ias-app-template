@@ -1,0 +1,25 @@
+<div class="notification is-info dashboard-group-item">
+  <p class="title is-6 has-text-centered is-uppercase">
+    <span>{{ item.tag }}</span>
+  </p>
+  <div class="content">
+    <div class="level is-mobile">
+
+      <div *ngFor="let val of getValues()" class="level-item has-text-centered">
+        <div>
+          <p class="heading">{{ val.name }}</p>
+          <p class="title is-6">{{ val.value }}</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="level">
+        <div class="level-item has-text-centered">
+          <div class="content">
+              <p class="heading">Last Updated</p>
+              <p class="heading" [title]="item.lastUpdatedAt?.toString()">{{ getRelativeTime(item.lastUpdatedAt) }}</p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
