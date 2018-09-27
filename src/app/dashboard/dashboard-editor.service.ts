@@ -24,9 +24,15 @@ export class DashboardEditorService {
       const num = this._dashboards.length + 1;
       this.dashboard = {
         name: 'New dashboard ' + num,
-        groups: [],
+        groups: [
+          {
+            name: 'Tag Group #1',
+            items: []
+          }
+        ],
         updateRate: 60
       };
+      this.dirty = true;
     }
 
     this.editMode = true;
@@ -36,6 +42,7 @@ export class DashboardEditorService {
     this.id = null;
     this.dashboard = null;
     this.editMode = false;
+    this.dirty = false;
   }
 
   save(): string {

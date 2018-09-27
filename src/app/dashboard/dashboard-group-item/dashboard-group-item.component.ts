@@ -70,4 +70,13 @@ export class DashboardGroupItemComponent implements OnInit {
     return moment(time).fromNow();
   }
 
+
+  getAbsoluteTime(time?: Date): string {
+    if (!time) {
+      return 'Unknown';
+    }
+
+    return moment(time).format('DD MMM YY HH:mm:ss');
+  }
+
 }

@@ -17,7 +17,12 @@
         <div class="level-item has-text-centered">
           <div class="content">
               <p class="heading">Last Updated</p>
-              <p class="heading" [title]="item.lastUpdatedAt?.toString()">{{ getRelativeTime(item.lastUpdatedAt) }}</p>
+              <p class="heading">
+                <span class="icon tooltip" [attr.data-tooltip]="getAbsoluteTime(item.lastUpdatedAt)">
+                  <fa-icon [icon]="['fas', 'info-circle']" [fixedWidth]="true"></fa-icon>
+                </span>
+                {{ getRelativeTime(item.lastUpdatedAt) }}
+              </p>
           </div>
         </div>
     </div>

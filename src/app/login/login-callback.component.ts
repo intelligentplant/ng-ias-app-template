@@ -12,8 +12,12 @@ export class LoginCallbackComponent implements OnInit {
   constructor(private _authService: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    this._authService.handleLoginCallback().subscribe(() => {
-      this._router.navigate(['/']);
+    this._authService.handleLoginCallback().subscribe(state => {
+      let redirectUrl = '/';
+      if (state) {
+        redirectUrl = atob(state);
+      }
+      this._router.navigateByUrl(redirectUrl);
     }, error => {
       console.error('Error while handling login callback:', error);
     });

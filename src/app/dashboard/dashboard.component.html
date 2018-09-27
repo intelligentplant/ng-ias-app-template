@@ -19,7 +19,7 @@
                                 <span>
                                     {{ db.name }}
                                 </span>
-                                <span class="icon" [title]="db.description ? db.description : db.name">
+                                <span class="icon tooltip" [attr.data-tooltip]="db.description ? db.description : db.name">
                                     <fa-icon [icon]="['fas', 'info-circle']"></fa-icon>
                                 </span>
                                 &nbsp;

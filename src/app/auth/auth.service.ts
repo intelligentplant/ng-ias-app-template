@@ -41,17 +41,17 @@ export class AuthService {
   }
 
 
-  public login(): void {
-    this._oauthService.initImplicitFlow();
+  public login(redirectUrl: string): void {
+    this._oauthService.initImplicitFlow(redirectUrl);
   }
 
 
-  public handleLoginCallback(): Observable<any> {
-    const sub = new Subject<any>();
+  public handleLoginCallback(): Observable<string> {
+    const sub = new Subject<string>();
     this._oauthService.tryLogin().then(() => {
       this.clearUserInfo();
       this.getUserInfoFromServer();
-      sub.next(null);
+      sub.next(this._oauthService.state);
     }, error => sub.error(error));
     return sub.asObservable();
   }

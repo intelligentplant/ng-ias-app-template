@@ -25,7 +25,12 @@ export class DashboardEditorComponent implements OnInit, OnDestroy {
   private _activeGroupIndex: number;
 
 
-  constructor(private _formBuilder: FormBuilder, private _editorSvc: DashboardEditorService, private _rtSvc: RealTimeDataService, private _tagSearchService: TagSearchService) {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _editorSvc: DashboardEditorService,
+    private _rtSvc: RealTimeDataService,
+    private _tagSearchService: TagSearchService
+  ) {
     this.createForm();
   }
 
@@ -61,7 +66,11 @@ export class DashboardEditorComponent implements OnInit, OnDestroy {
     });
 
     this.form.statusChanges.subscribe(() => {
-      this._editorSvc.dirty = this.form.dirty;
+      this._editorSvc.dirty = this._editorSvc.dirty || this.form.dirty || this.form.touched;
+    });
+
+    this.form.valueChanges.subscribe(() => {
+      this._editorSvc.dirty = this._editorSvc.dirty || this.form.dirty || this.form.touched;
     });
   }
 
@@ -89,7 +98,12 @@ export class DashboardEditorComponent implements OnInit, OnDestroy {
 
 
   deleteGroup(index: number): void {
-    if (confirm('Delete this dashboard group?')) {
+    if (this.dashboardGroups.length === 1) {
+      alert('Unable to delete: your dashboard must include at least one tag group.');
+      return;
+    }
+
+    if (confirm('Delete this dashboard tag group?')) {
       this.dashboardGroups.removeAt(index);
     }
   }
@@ -133,14 +147,17 @@ export class DashboardEditorComponent implements OnInit, OnDestroy {
     if (this._activeGroupIndex >= 0) {
       const grp = this.dashboardGroups.at(this._activeGroupIndex) as FormGroup;
       if (grp) {
-        this._tagSearchService.selectedTags.forEach((x: any) => this.addItemToGroup(grp, {
-          dsn: x._dsn,
-          tag: x.Name,
-          description: x.Description,
-          subscriptions: [
-            valueTypes.snapshot.name
-          ]
-        }));
+        this._tagSearchService.selectedTags.forEach((x: any) => {
+          this.addItemToGroup(grp, {
+            dsn: x._dsn,
+            tag: x.Name,
+            description: x.Description,
+            subscriptions: [
+              valueTypes.snapshot.name
+            ]
+          });
+          this._editorSvc.dirty = true;
+        });
       }
       this._activeGroupIndex = -1;
     }
