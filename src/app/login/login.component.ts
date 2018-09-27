@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit {
     }
 
     this._route.queryParams.subscribe(params => {
-      this._redirectUrl = '' + params['redirectUrl'];
+      const redirect = params['redirectUrl'];
+      this._redirectUrl = redirect 
+        ? '' + params['redirectUrl'] 
+        : null;
     });
   }
 
