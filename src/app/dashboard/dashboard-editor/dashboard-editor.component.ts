@@ -83,7 +83,7 @@ export class DashboardEditorComponent implements OnInit, OnDestroy {
   }
 
 
-  addGroup(group: DashboardGroup): void {
+  addGroup(group?: DashboardGroup): void {
     const ctrl = this._formBuilder.group({
       name: [group && group.name ? group.name : 'Untitled Group', Validators.required],
       items: this._formBuilder.array([])

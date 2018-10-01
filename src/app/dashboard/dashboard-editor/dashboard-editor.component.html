@@ -35,7 +35,7 @@
 
   <div formArrayName="groups">
     
-    <div *ngFor="let group of form.get('groups').controls; let i=index" [formGroupName]="i" class="message">
+    <div *ngFor="let group of form.get('groups')['controls']; let i=index" [formGroupName]="i" class="message">
 
       <div class="message-header">
         Group: {{ group.get('name').value ? group.get('name').value : 'Untitled Group' }}
@@ -52,7 +52,7 @@
           </div>
 
           <div formArrayName="items" class="columns is-multiline">
-            <div *ngFor="let item of group.get('items').controls; let j=index" [formGroupName]="j" class="column is-full-mobile is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
+            <div *ngFor="let item of group.get('items')['controls']; let j=index" [formGroupName]="j" class="column is-full-mobile is-half-tablet is-one-third-desktop is-one-quarter-widescreen">
               <div class="notification group-item">
                 <button class="delete" aria-label="delete" (click)="removeTagFromGroup(i, j)" title="Remove this tag"></button>
                 <p class="title is-6 has-text-centered is-uppercase">

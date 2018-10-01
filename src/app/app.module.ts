@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -22,6 +23,7 @@ import { DashboardGroupComponent } from './dashboard/dashboard-group/dashboard-g
 import { DashboardGroupItemComponent } from './dashboard/dashboard-group-item/dashboard-group-item.component';
 import { DashboardToolbarComponent } from './dashboard/dashboard-toolbar/dashboard-toolbar.component';
 import { DashboardEditorComponent } from './dashboard/dashboard-editor/dashboard-editor.component';
+import { environment } from '../environments/environment';
 
 
 
@@ -54,7 +56,8 @@ const onInit = (appConfig: AppConfigService) => {
     ReactiveFormsModule,
     OAuthModule.forRoot(),
     RouterModule.forRoot(routes),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: onInit, deps: [AppConfigService], multi: true },
