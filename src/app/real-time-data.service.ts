@@ -7,10 +7,8 @@ import { map } from 'rxjs/operators';
 import {
   ComponentDefinition,
   HistoricalTagValuesDataSourceDictionary,
-  HistoricalTagValuesDictionary,
   SnapshotDataQuery,
   SnapshotTagValuesDataSourceDictionary,
-  SnapshotTagValuesDictionary,
   TagDefinition,
   TagSearchFilter,
   PlotDataQuery,
